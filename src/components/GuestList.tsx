@@ -105,8 +105,12 @@ export default function GuestList({
     );
   }
 
-  // Show FOMO counter
-  const guestCount = guests.length;
+  // A row with a +1 is two people at the party.
+  const partyCount = guests.reduce((total, guest) => {
+    const hasPlusOne = Boolean(guest.plus_one_names && guest.plus_one_names.trim());
+    return total + (hasPlusOne ? 2 : 1);
+  }, 0);
+  const guestCount = partyCount;
 
   if (guestCount === 0) {
     return (
@@ -129,7 +133,7 @@ export default function GuestList({
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <span style={{ fontSize: '0.7rem', letterSpacing: '3px', color: 'var(--brand-gold)', textTransform: 'uppercase', fontWeight: 700, opacity: 0.8 }}>
-            GUEST DATABASE — {guestCount} RECORDS
+            GUEST DATABASE — {guestCount} GUESTS
           </span>
         </div>
         <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 0.5rem', fontSize: '0.85rem', color: 'var(--text-primary)' }}>
@@ -279,7 +283,7 @@ export default function GuestList({
           padding: '0.5rem 1rem',
           WebkitOverflowScrolling: 'touch',
           scrollbarWidth: 'none',
-          justifyContent: guestCount <= 5 ? 'center' : 'flex-start',
+          justifyContent: guests.length <= 5 ? 'center' : 'flex-start',
         }}>
           {content}
         </div>
