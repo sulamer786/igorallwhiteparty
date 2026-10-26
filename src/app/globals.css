@@ -1,0 +1,372 @@
+/* ============================================================
+   IGOR'S ALL WHITE PARTY — GLOBAL DESIGN SYSTEM
+   Ivory ground, charcoal type, champagne accent
+   ============================================================ */
+
+:root {
+  /* Core brand colors */
+  --bg-color: #f7f4ef;
+  --bg-gradient: radial-gradient(circle at top, #fffdf9 0%, #f7f4ef 62%);
+  --brand-emerald: #3a3228;
+  --brand-green: #1c1c1c;
+  --brand-gold: #6e5840;
+  --brand-gold-glow: #c4ae8a;
+  --brand-red-accent: #8a3a3a;
+  --brand-neon-pink: #6e5840;
+  --brand-purple: #c4ae8a;
+  --brand-deep-purple: #f3efe8;
+  --brand-burgundy: #efe8dc;
+  --text-primary: #1c1c1c;
+  --text-secondary: #6d645b;
+  --border-color: rgba(110, 88, 64, 0.22);
+  --error-color: #9a3030;
+
+  /* Layout */
+  --max-width: 600px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --noise: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  background-color: var(--bg-color);
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-gold-glow);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   INVITATION PANELS
+   ============================================================ */
+.glass-panel {
+  background: rgba(255, 252, 248, 0.82);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--border-color);
+  box-shadow:
+    0 10px 30px rgba(60, 45, 25, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-md);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+
+/* Hairline inner frame, like a letterpress card */
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 6px; left: 6px; right: 6px; bottom: 6px;
+  border-radius: calc(var(--radius-md) - 4px);
+  border: 1px solid rgba(110, 88, 64, 0.14);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-panel:hover {
+  border-color: rgba(110, 88, 64, 0.4);
+  box-shadow: 0 12px 32px rgba(60, 45, 25, 0.08);
+}
+
+/* ============================================================
+   PEARL SHIMMER — readable on ivory
+   ============================================================ */
+.gold-text {
+  background: linear-gradient(
+    135deg,
+    #1c1c1c 0%,
+    #5c4a32 28%,
+    #a89068 50%,
+    #5c4a32 72%,
+    #1c1c1c 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes gold-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Soft warmth only — heavy black shadows muddy an ivory page */
+.text-glow {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.text-glow-subtle {
+  text-shadow: none;
+}
+
+.content-scrim {
+  position: relative;
+}
+
+.content-scrim::before {
+  content: none;
+}
+
+.spotlight {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.texture-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  background-image: var(--noise);
+}
+
+/* ============================================================
+   FORM INPUTS
+   ============================================================ */
+.luxury-input {
+  background: #fffdfb;
+  border: 1px solid rgba(110, 88, 64, 0.28);
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  outline: none;
+  font-family: inherit;
+  font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.luxury-input:focus {
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(110, 88, 64, 0.12);
+  background: #ffffff;
+}
+
+.luxury-input::placeholder {
+  color: rgba(28, 28, 28, 0.38);
+}
+
+/* ============================================================
+   CTA — soft charcoal pulse
+   ============================================================ */
+.cta-pulse {
+  animation: cta-breathe 3s ease-in-out infinite;
+}
+
+@keyframes cta-breathe {
+  0%, 100% {
+    box-shadow: 0 6px 18px rgba(28, 28, 28, 0.16);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(28, 28, 28, 0.28);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   DRIFTING PEARLS
+   ============================================================ */
+.particle-field {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #e7d7c3 55%, #c4ae8a);
+  opacity: 0;
+  animation: float-particle 12s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 14s; }
+.particle:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 11s; }
+.particle:nth-child(3) { left: 40%; animation-delay: 4s; animation-duration: 16s; }
+.particle:nth-child(4) { left: 55%; animation-delay: 1s; animation-duration: 13s; }
+.particle:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 10s; }
+.particle:nth-child(6) { left: 85%; animation-delay: 5s; animation-duration: 15s; }
+.particle:nth-child(7) { left: 15%; animation-delay: 6s; animation-duration: 12s; }
+.particle:nth-child(8) { left: 60%; animation-delay: 7s; animation-duration: 14s; }
+
+@keyframes float-particle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  50% { opacity: 0.4; transform: translateY(50vh) scale(1) translateX(20px); }
+  90% { opacity: 0.55; }
+  100% { transform: translateY(-10vh) scale(0.5) translateX(-10px); opacity: 0; }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.countdown-digit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 65px;
+}
+
+.countdown-digit .value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Cinzel Decorative', serif;
+}
+
+.countdown-digit .label {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.countdown-separator {
+  font-size: 2rem;
+  color: var(--brand-gold);
+  opacity: 0.5;
+  align-self: flex-start;
+  padding-top: 0.3rem;
+}
+
+.date-separator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brand-gold);
+  opacity: 0.7;
+}
+
+.date-separator::before,
+.date-separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+/* Larger pearls that drift behind the invite */
+@keyframes float-suit {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  15% { opacity: 0.55; transform: translateY(75vh) scale(0.8); }
+  50% { opacity: 0.35; transform: translateY(40vh) scale(1); }
+  85% { opacity: 0.45; }
+  100% { transform: translateY(-10vh) scale(0.6); opacity: 0; }
+}
+
+.card-suit {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f4efe6 40%, #d9c7aa 78%);
+  box-shadow: 0 2px 6px rgba(80, 60, 30, 0.12);
+  pointer-events: none;
+  animation: float-suit 18s ease-in-out infinite;
+  z-index: 0;
+}
+
+.card-suit:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 20s; }
+.card-suit:nth-child(2) { left: 15%; animation-delay: 3s; animation-duration: 16s; }
+.card-suit:nth-child(3) { left: 30%; animation-delay: 6s; animation-duration: 22s; }
+.card-suit:nth-child(4) { left: 45%; animation-delay: 1s; animation-duration: 18s; }
+.card-suit:nth-child(5) { left: 60%; animation-delay: 4s; animation-duration: 15s; }
+.card-suit:nth-child(6) { left: 75%; animation-delay: 7s; animation-duration: 21s; }
+.card-suit:nth-child(7) { left: 90%; animation-delay: 2s; animation-duration: 17s; }
+.card-suit:nth-child(8) { left: 50%; animation-delay: 5s; animation-duration: 19s; }
+
+@media (max-width: 430px) {
+  .countdown-digit { min-width: 55px; }
+  .countdown-digit .value { font-size: 2rem; }
+}
