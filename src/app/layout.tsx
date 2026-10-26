@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jeniebirthday.com"),
+  metadataBase: new URL("https://igorallwhiteparty.vercel.app"),
   title: "Igor's All White Party — November 7th",
   description:
     "You're invited to Igor's All White Party. November 7th, 8:00 PM to 2:00 AM at The Victoria Park Mansion. Wear white. RSVP to secure your spot on the guest list.",
