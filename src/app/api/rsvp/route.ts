@@ -26,6 +26,82 @@ const rsvpSchema = z.object({
   host: z.literal('white').default('white'),
 });
 
+const PARTY_HOST = 'white';
+
+function isExistingAccountError(message: string) {
+  return /already (been )?registered/i.test(message);
+}
+
+// The old party and this one share one login per email.
+// Someone from Casino Royale can still join this list.
+async function findAuthUserId(email: string) {
+  const normalized = email.toLowerCase();
+  for (let page = 1; page <= 20; page++) {
+    const { data, error } = await supabaseAdmin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error || !data.users.length) return null;
+    const match = data.users.find((user) => user.email?.toLowerCase() === normalized);
+    if (match) return match.id;
+    if (data.users.length < 200) return null;
+  }
+  return null;
+}
+
+async function sendConfirmation(email: string, fullName: string) {
+  if (!process.env.RESEND_API_KEY) return;
+  const firstName = fullName.split(' ')[0];
+  await resend.emails.send({
+    from: "Igor's All White Party <rsvp@jeniebirthday.com>",
+    to: email,
+    subject: "You're on the list: Igor's All White Party",
+    html: `
+      <div style="background-color: #f7f4ef; color: #1c1c1c; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 0; margin: 0;">
+        <div style="background: #f7f4ef; padding: 60px 20px 40px; text-align: center;">
+          <p style="color: #6e5840; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 20px;">Exclusive Invitation</p>
+          <h1 style="color: #1c1c1c; text-transform: uppercase; font-size: 32px; letter-spacing: 4px; margin: 0 0 10px; font-weight: 700;">You're on the list</h1>
+          <h2 style="color: #6e5840; font-size: 18px; font-weight: 400; margin: 0; font-style: italic;">${firstName}</h2>
+        </div>
+
+        <div style="max-width: 520px; margin: 0 auto; padding: 0 20px 50px;">
+          <div style="background-color: #fffdfb; padding: 30px; border: 1px solid rgba(110, 88, 64, 0.22); border-radius: 16px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
+                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">When</p>
+                  <p style="font-size: 16px; margin: 0; color: #1c1c1c;">November 7th &bull; 8:00 PM – 2:00 AM</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
+                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Where</p>
+                  <p style="font-size: 16px; margin: 0; color: #1c1c1c;">544 North Victoria Park Road<br/>Fort Lauderdale, FL 33301</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
+                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Experience</p>
+                  <p style="font-size: 15px; margin: 0; color: #6d645b;">Premium Top Shelf Open Bar &bull; Internationally Known DJs &bull; Performances &bull; Complimentary Valet Parking</p>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 15px 0;">
+                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Dress code</p>
+                  <p style="color: #1c1c1c; font-size: 16px; font-weight: bold; margin: 0; letter-spacing: 1px;">All white, head to toe</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div style="text-align: center; margin-top: 40px;">
+            <p style="color: #6d645b; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
+              See you in white.
+            </p>
+          </div>
+        </div>
+      </div>
+    `,
+  }).catch(console.error);
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -51,13 +127,62 @@ export async function POST(req: Request) {
     });
 
     if (authError) {
-      if (authError.message.includes("already registered")) {
+      if (!isExistingAccountError(authError.message)) {
+        return NextResponse.json({ error: authError.message }, { status: 500 });
+      }
+
+      const { data: existingGuest, error: lookupError } = await supabaseAdmin
+        .from('guests')
+        .select('id, host')
+        .ilike('email', email)
+        .maybeSingle();
+
+      if (lookupError) {
+        return NextResponse.json({ error: lookupError.message }, { status: 500 });
+      }
+
+      if (existingGuest?.host === PARTY_HOST) {
         return NextResponse.json(
           { error: "This email is already on the list. Please login instead." },
           { status: 409 }
         );
       }
-      return NextResponse.json({ error: authError.message }, { status: 500 });
+
+      const userId = existingGuest?.id ?? await findAuthUserId(email);
+      if (!userId) {
+        return NextResponse.json(
+          { error: "This email is already on the list. Please login instead." },
+          { status: 409 }
+        );
+      }
+
+      if (password) {
+        const { error: passwordError } = await supabaseAdmin.auth.admin.updateUserById(userId, { password });
+        if (passwordError) {
+          return NextResponse.json({ error: passwordError.message }, { status: 500 });
+        }
+      }
+
+      const guestFields = {
+        full_name: fullName,
+        phone: phone || null,
+        plus_one_names: plusOneNames || null,
+        tracking_ref: trackingRef || null,
+        host: PARTY_HOST,
+        rsvp_status: 'attending',
+        ...(avatarUrl ? { photo_url: avatarUrl } : {}),
+      };
+
+      const { error: moveError } = existingGuest
+        ? await supabaseAdmin.from('guests').update(guestFields).eq('id', userId)
+        : await supabaseAdmin.from('guests').insert({ id: userId, email, ...guestFields });
+
+      if (moveError) {
+        return NextResponse.json({ error: moveError.message }, { status: 500 });
+      }
+
+      await sendConfirmation(email, fullName);
+      return NextResponse.json({ success: true });
     }
 
     const userId = authData.user.id;
@@ -81,62 +206,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: guestError.message }, { status: 500 });
     }
 
-    // 3. Send Confirmation Email via Resend
-    if (process.env.RESEND_API_KEY) {
-      const firstName = fullName.split(' ')[0];
-      await resend.emails.send({
-        from: "Igor's All White Party <rsvp@jeniebirthday.com>",
-        to: email,
-        subject: "You're on the list: Igor's All White Party",
-        html: `
-          <div style="background-color: #f7f4ef; color: #1c1c1c; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 0; margin: 0;">
-            <div style="background: #f7f4ef; padding: 60px 20px 40px; text-align: center;">
-              <p style="color: #6e5840; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 20px;">Exclusive Invitation</p>
-              <h1 style="color: #1c1c1c; text-transform: uppercase; font-size: 32px; letter-spacing: 4px; margin: 0 0 10px; font-weight: 700;">You're on the list</h1>
-              <h2 style="color: #6e5840; font-size: 18px; font-weight: 400; margin: 0; font-style: italic;">${firstName}</h2>
-            </div>
-
-            <div style="max-width: 520px; margin: 0 auto; padding: 0 20px 50px;">
-              <div style="background-color: #fffdfb; padding: 30px; border: 1px solid rgba(110, 88, 64, 0.22); border-radius: 16px;">
-                <table style="width: 100%; border-collapse: collapse;">
-                  <tr>
-                    <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                      <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">When</p>
-                      <p style="font-size: 16px; margin: 0; color: #1c1c1c;">November 7th &bull; 8:00 PM – 2:00 AM</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                      <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Where</p>
-                      <p style="font-size: 16px; margin: 0; color: #1c1c1c;">544 North Victoria Park Road<br/>Fort Lauderdale, FL 33301</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                      <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Experience</p>
-                      <p style="font-size: 15px; margin: 0; color: #6d645b;">Premium Top Shelf Open Bar &bull; Internationally Known DJs &bull; Performances &bull; Complimentary Valet Parking</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 15px 0;">
-                      <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Dress code</p>
-                      <p style="color: #1c1c1c; font-size: 16px; font-weight: bold; margin: 0; letter-spacing: 1px;">All white, head to toe</p>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-              <div style="text-align: center; margin-top: 40px;">
-                <p style="color: #6d645b; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
-                  See you in white.
-                </p>
-              </div>
-            </div>
-          </div>
-        `,
-      }).catch(console.error);
-    }
-
+    await sendConfirmation(email, fullName);
     return NextResponse.json({ success: true });
 
   } catch (error: any) {
