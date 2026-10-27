@@ -123,6 +123,15 @@ export default function LandingPage({ host }: { host: HostKey }) {
             >
               {config.dateLabel}
             </motion.p>
+            <motion.p
+              className="caps reading-type"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.65, duration: 0.6 }}
+              style={{ marginTop: '0.45rem', letterSpacing: '0.12em' }}
+            >
+              {config.address}
+            </motion.p>
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -176,20 +185,10 @@ export default function LandingPage({ host }: { host: HostKey }) {
                 {config.closing}
               </p>
             </motion.div>
-
-            <motion.p
-              className="caps reading-type"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.6, duration: 0.6 }}
-              style={{ marginTop: '0.9rem', letterSpacing: '0.12em' }}
-            >
-              {config.address}
-            </motion.p>
           </section>
 
           <motion.section
-            className="glass-panel"
+            className="glass-panel poster-list"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.7, duration: 0.7 }}
