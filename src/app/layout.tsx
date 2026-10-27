@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/og-white-night.png",
-        width: 1920,
-        height: 1080,
+        width: 1200,
+        height: 630,
         alt: "Igor's White Party — An Evening Under the Stars",
       },
     ],

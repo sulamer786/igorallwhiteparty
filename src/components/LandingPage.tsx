@@ -134,10 +134,10 @@ export default function LandingPage({ host }: { host: HostKey }) {
             </motion.div>
           </section>
 
-          {/* A breath of the pool before the hours */}
-          <div style={{ height: '16vh' }} />
+          {/* A short breath of the pool, leaving the address above the button */}
+          <div style={{ height: '3vh' }} />
 
-          <section className="poster-lower">
+          <section className="poster-lower poster-reading">
             <motion.div
               className="time-rule"
               initial={{ opacity: 0 }}
@@ -146,7 +146,7 @@ export default function LandingPage({ host }: { host: HostKey }) {
             >
               <span className="diamond-rule-line" />
               <span className="diamond" />
-              <span className="poster-title" style={{ fontSize: 'clamp(1.45rem, 6vw, 1.85rem)', letterSpacing: '0.08em' }}>
+              <span className="poster-title reading-hours" style={{ fontSize: 'clamp(1.45rem, 6vw, 1.85rem)', letterSpacing: '0.08em' }}>
                 {config.hours}
               </span>
               <span className="diamond" />
@@ -156,11 +156,11 @@ export default function LandingPage({ host }: { host: HostKey }) {
             <AmenityGrid items={config.amenities} reveal />
 
             <motion.p
-              className="caps"
+              className="caps reading-type"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2.3, duration: 0.6 }}
-              style={{ color: '#f6f1e6', fontSize: '0.68rem', marginTop: '0.4rem' }}
+              style={{ marginTop: '0.4rem' }}
             >
               {config.attire}
             </motion.p>
@@ -172,17 +172,17 @@ export default function LandingPage({ host }: { host: HostKey }) {
               style={{ marginTop: '1.15rem' }}
             >
               <DiamondRule />
-              <p className="caps" style={{ color: '#e4c98a', fontSize: '0.68rem', marginTop: '0.75rem' }}>
+              <p className="caps reading-type" style={{ marginTop: '0.75rem' }}>
                 {config.closing}
               </p>
             </motion.div>
 
             <motion.p
-              className="caps"
+              className="caps reading-type"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2.6, duration: 0.6 }}
-              style={{ color: 'rgba(246,241,230,0.78)', fontSize: '0.58rem', marginTop: '1.1rem', letterSpacing: '0.16em' }}
+              style={{ marginTop: '0.9rem', letterSpacing: '0.12em' }}
             >
               {config.address}
             </motion.p>
@@ -193,7 +193,7 @@ export default function LandingPage({ host }: { host: HostKey }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.7, duration: 0.7 }}
-            style={{ textAlign: 'center', padding: '1.4rem 1rem', margin: '1.4rem 1rem 0' }}
+            style={{ textAlign: 'center', padding: '1.4rem 1rem', margin: '1.25rem 1rem 0' }}
           >
             <p className="caps" style={{ color: '#e4c98a', fontSize: '0.64rem', marginBottom: '0.9rem' }}>
               The Guest List

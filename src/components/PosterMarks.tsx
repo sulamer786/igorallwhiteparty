@@ -33,8 +33,8 @@ export function AmenityIcon({ name }: { name: AmenityIcon }) {
     strokeWidth: 1.15,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
-    width: 26,
-    height: 26,
+    width: 32,
+    height: 32,
     'aria-hidden': true,
   };
 

@@ -177,11 +177,35 @@ textarea:focus-visible {
 .poster-lockup,
 .poster-lower {
   text-align: center;
-  padding: 0 1.35rem;
 }
 
 .poster-lockup {
-  padding-top: 10vh;
+  padding: 0 1.35rem;
+}
+
+/* Navy band so the hours and promises sit off the bright pool. */
+.poster-reading {
+  margin: 0 0.85rem;
+  padding: 1.2rem 0.7rem 1.35rem;
+  background: rgba(7, 17, 31, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+.reading-type {
+  color: #f7f3ea;
+  font-size: 0.8rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+.reading-hours {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55), 0 0 28px rgba(255, 236, 200, 0.45);
+}
+
+.poster-lockup {
+  padding-top: 4.5vh;
 }
 
 /* Giant flyer title. White, with a warm bloom. Gold is not the fill. */
@@ -256,20 +280,21 @@ textarea:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 42px;
+  min-width: 62px;
 }
 
 .editorial-countdown .poster-title {
-  font-size: 1.35rem;
+  font-size: 1.7rem;
   letter-spacing: 0.02em;
-  text-shadow: 0 0 16px rgba(255, 236, 200, 0.35);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55), 0 0 16px rgba(255, 236, 200, 0.35);
 }
 
 .editorial-countdown .caps {
   margin-top: 0.28rem;
-  font-size: 0.48rem;
-  letter-spacing: 0.18em;
-  color: rgba(228, 201, 138, 0.85);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: #f7f3ea;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
 .amenity-grid {
@@ -297,11 +322,12 @@ textarea:focus-visible {
 
 .amenity-cell span {
   font-family: 'Cinzel', serif;
-  font-size: 0.52rem;
-  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  line-height: 1.35;
-  color: #e4c98a;
+  line-height: 1.45;
+  color: #f7f3ea;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
 .poster-cta {
@@ -311,8 +337,8 @@ textarea:focus-visible {
   transform: translateX(-50%);
   width: min(460px, 100%);
   z-index: 50;
-  padding: 1.4rem 1.15rem calc(0.7rem + env(safe-area-inset-bottom));
-  background: linear-gradient(to top, rgba(7, 17, 31, 0.94) 42%, transparent);
+  padding: 0.7rem 1.15rem calc(0.45rem + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(7, 17, 31, 0.92) 62%, transparent);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -352,17 +378,17 @@ textarea:focus-visible {
 }
 
 .poster-credit {
-  margin-top: 1.1rem;
-  opacity: 0.4;
-  font-size: 0.52rem;
-  letter-spacing: 0.18em;
+  margin-top: 0.55rem;
+  opacity: 0.85;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #f6f1e6;
   font-family: 'Cinzel', serif;
 }
 
 .poster-credit:hover {
-  opacity: 0.75;
+  opacity: 1;
 }
 
 /* ============================================================
