@@ -86,9 +86,9 @@ function OverviewTab({ host }: { host: HostKey }) {
           A few notes so the night stays as considered as the room.
         </p>
         <ul style={{ paddingLeft: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>
-          <li style={{ marginBottom: '1rem' }}><strong>Photographs:</strong> Photographers and videographers will be circling to capture the night. Come camera ready.</li>
+          <li style={{ marginBottom: '1rem' }}><strong>Photographs:</strong> Photographers will be circling to capture the night. Come camera ready.</li>
           <li style={{ marginBottom: '1rem' }}>
-            <strong>Dress code:</strong> All white, head to toe.
+            <strong>Dress code:</strong> All White.
           </li>
           <li><strong>The thread:</strong> The guest thread is for photos and messages from the night. Keep it among the list.</li>
         </ul>
@@ -136,7 +136,7 @@ function OverviewTab({ host }: { host: HostKey }) {
           544 North Victoria Park Road<br />Fort Lauderdale, FL 33301
         </p>
         <div style={{ padding: '1rem', background: 'rgba(110,88,64,0.06)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--brand-gold)' }}>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}><strong>Valet:</strong> At the front gates. Rideshare is encouraged.</p>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}><strong>Valet:</strong> At the Front. Rideshare is encouraged.</p>
         </div>
       </section>
     </motion.div>

@@ -106,20 +106,11 @@ export default function LandingPage({ host }: { host: HostKey }) {
             </motion.p>
 
             <motion.p
-              className="caps"
+              className="poster-title"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.4, duration: 0.6 }}
-              style={{ color: '#f6f1e6', fontSize: '0.72rem', marginTop: '0.85rem' }}
-            >
-              {config.city}
-            </motion.p>
-            <motion.p
-              className="caps"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.55, duration: 0.6 }}
-              style={{ color: 'rgba(246,241,230,0.72)', fontSize: '0.62rem', marginTop: '0.4rem' }}
+              transition={{ delay: 1.45, duration: 0.7 }}
+              style={{ fontSize: 'clamp(1.45rem, 5.5vw, 1.85rem)', marginTop: '0.85rem', letterSpacing: '0.04em' }}
             >
               {config.dateLabel}
             </motion.p>
@@ -171,7 +162,7 @@ export default function LandingPage({ host }: { host: HostKey }) {
               transition={{ delay: 2.3, duration: 0.6 }}
               style={{ marginTop: '0.4rem' }}
             >
-              {config.attire}
+              All White
             </motion.p>
 
             <motion.div
