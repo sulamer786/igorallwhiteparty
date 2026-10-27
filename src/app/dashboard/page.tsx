@@ -44,24 +44,6 @@ function OverviewTab({ host }: { host: HostKey }) {
       transition={{ duration: 0.35 }}
       style={{ padding: '1.5rem', paddingBottom: '140px', position: 'relative' }}
     >
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        marginBottom: '1.5rem', padding: '0.8rem 1rem',
-        borderBottom: '1px solid var(--border-color)',
-      }}>
-        <div>
-          <p style={{ fontSize: '0.65rem', letterSpacing: '3px', color: 'var(--brand-gold)', textTransform: 'uppercase' }}>
-            November 7
-          </p>
-          <p style={{ fontSize: '0.65rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginTop: '2px', textTransform: 'uppercase' }}>
-            {config.hours}
-          </p>
-        </div>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '2px', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-          11.07
-        </p>
-      </div>
-
       <section className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '12px', right: '16px', fontSize: '0.6rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>
           11.07
