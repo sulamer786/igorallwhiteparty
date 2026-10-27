@@ -118,7 +118,7 @@ function OverviewTab({ host }: { host: HostKey }) {
               No gifts, flowers, or alcohol please — cash only via Zelle.
             </p>
             <p style={{ fontSize: '0.9rem', color: 'var(--brand-gold)', fontWeight: 600 }}>
-              Suggested donation: $100 per person
+              Suggested donation: $75 per person
             </p>
           </div>
         </div>

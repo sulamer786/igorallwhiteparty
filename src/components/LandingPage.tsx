@@ -119,7 +119,7 @@ export default function LandingPage({ host }: { host: HostKey }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.65, duration: 0.6 }}
-              style={{ marginTop: '0.45rem', letterSpacing: '0.12em' }}
+              style={{ marginTop: '1.05rem', letterSpacing: '0.12em' }}
             >
               {config.address}
             </motion.p>

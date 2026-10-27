@@ -402,7 +402,7 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                             No gifts, flowers, or alcohol please — cash only via Zelle.
                           </p>
                           <p style={{ fontSize: '0.85rem', color: 'var(--brand-gold)', marginTop: '0.4rem', fontWeight: 600 }}>
-                            Suggested donation: $100 per person
+                            Suggested donation: $75 per person
                           </p>
                         </div>
                       </motion.div>
