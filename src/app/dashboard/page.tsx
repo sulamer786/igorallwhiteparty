@@ -48,7 +48,6 @@ function OverviewTab({ host }: { host: HostKey }) {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         marginBottom: '1.5rem', padding: '0.8rem 1rem',
         borderBottom: '1px solid var(--border-color)',
-        borderTop: '1px solid var(--border-color)',
       }}>
         <div>
           <p style={{ fontSize: '0.65rem', letterSpacing: '3px', color: 'var(--brand-gold)', textTransform: 'uppercase' }}>

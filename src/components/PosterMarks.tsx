@@ -50,12 +50,13 @@ export function AmenityIcon({ name }: { name: AmenityIcon }) {
     );
   }
 
-  if (name === 'coupe') {
+  if (name === 'sushi') {
     return (
       <svg {...common}>
-        <path d="M7 12h18L21 18H11L7 12z" />
-        <path d="M16 18v6" />
-        <path d="M11.5 24h9" />
+        <path d="M6.5 18.5c2.2 3.4 6.2 5.2 9.5 5.2s7.3-1.8 9.5-5.2" />
+        <path d="M8 18.5h16" />
+        <path d="M12.2 14.2c.7-2.2 2.4-3.4 3.8-3.4s3.1 1.2 3.8 3.4" />
+        <path d="M16 10.8v3.4" />
       </svg>
     );
   }
@@ -100,7 +101,7 @@ export function AmenityIcon({ name }: { name: AmenityIcon }) {
 }
 
 // Flyer order: three columns, the pair stacked inside each column.
-const DISPLAY_ORDER = ['valet', 'carpet', 'bar', 'drinks', 'dj', 'fireworks'];
+const DISPLAY_ORDER = ['valet', 'carpet', 'bar', 'sushi', 'dj', 'fireworks'];
 
 export function AmenityGrid({
   items,

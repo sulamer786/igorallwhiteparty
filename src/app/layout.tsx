@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://igorallwhiteparty.vercel.app"),
   title: "Igor's White Party — An Evening Under the Stars",
   description:
-    "An exclusive invitation to Igor's White Party. November 7th, 10 PM to 3 AM in Fort Lauderdale. Wear white. By invitation only.",
+    "An exclusive invitation to Igor's White Party. November 7th, 9 PM to 3 AM in Fort Lauderdale. Wear white. By invitation only.",
   keywords: ["white party", "Igor", "Fort Lauderdale", "VIP event", "luxury party", "November 7"],
   openGraph: {
     title: "Igor's White Party",
-    description: "An evening under the stars. November 7th, 10 PM to 3 AM. Fort Lauderdale. Wear white.",
+    description: "An evening under the stars. November 7th, 9 PM to 3 AM. Fort Lauderdale. Wear white.",
     type: "website",
     images: [
       {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Igor's White Party",
-    description: "An evening under the stars. November 7th, 10 PM to 3 AM. Fort Lauderdale. Wear white.",
+    description: "An evening under the stars. November 7th, 9 PM to 3 AM. Fort Lauderdale. Wear white.",
     images: ["/images/og-white-night.png"],
   },
 };

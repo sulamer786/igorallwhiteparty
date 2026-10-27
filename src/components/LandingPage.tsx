@@ -52,8 +52,8 @@ export default function LandingPage({ host }: { host: HostKey }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const searchParams = useSearchParams();
   const trackingRef = searchParams.get('ref') || searchParams.get('utm_source') || 'direct';
-  // Doors at 10:00 PM Eastern on November 7, 2026.
-  const eventDate = new Date('2026-11-07T22:00:00-04:00');
+  // Doors at 9:00 PM Eastern on November 7, 2026. That night is standard time.
+  const eventDate = new Date('2026-11-07T21:00:00-05:00');
   const config = EVENT_CONFIG[host];
 
   return (
