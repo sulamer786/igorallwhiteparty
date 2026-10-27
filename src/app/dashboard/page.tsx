@@ -51,10 +51,25 @@ function OverviewTab({ host }: { host: HostKey }) {
         <h2 className="gold-text" style={{ fontSize: '1.35rem', marginBottom: '0.3rem', letterSpacing: '2px' }}>
           THE EVENING
         </h2>
-        <p style={{ fontSize: '0.75rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
-          {config.dateLabel} &bull; {config.hours}
+        <p style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.4rem',
+          margin: '0 0 0.4rem',
+          fontSize: '0.75rem',
+          letterSpacing: '2px',
+          lineHeight: 1,
+          textTransform: 'uppercase',
+          color: 'var(--text-secondary)',
+          // Lining figures sit on the same line as the capitals. The default digits hang below the words.
+          fontVariantNumeric: 'lining-nums',
+          fontFeatureSettings: '"lnum" 1',
+        }}>
+          <span>{config.dateLabel}</span>
+          <span aria-hidden style={{ letterSpacing: 0 }}>•</span>
+          <span>{config.hours}</span>
         </p>
-        <p className="italic-line" style={{ fontSize: '1.15rem', marginBottom: '0.6rem' }}>
+        <p className="italic-line" style={{ fontSize: '1.15rem', margin: '0 0 0.6rem', lineHeight: 1.2 }}>
           {config.italicLine}
         </p>
         <AmenityGrid items={config.amenities} />
