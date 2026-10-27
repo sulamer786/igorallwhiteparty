@@ -135,6 +135,15 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
+/* iOS draws its own play button on a clip that has not started. */
+.night-media::-webkit-media-controls,
+.night-media::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .night-scrim-poster {
   position: absolute;
   inset: 0;
