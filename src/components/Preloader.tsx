@@ -78,7 +78,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
             />
 
-            {/* Igor, graded into the night and kept clear enough to see */}
+            {/* Igor, framed high so the title sits in the night below him */}
             <motion.div
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -86,23 +86,22 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               style={{ position: 'absolute', inset: 0, zIndex: 0 }}
             >
               <Image
-                src="/images/igor pic.png"
+                src="/images/igor-intro.jpg"
                 alt=""
                 fill
                 priority
                 style={{
                   objectFit: 'cover',
-                  objectPosition: 'center 18%',
-                  filter: 'contrast(1.08) saturate(0.92) sepia(0.12)',
+                  objectPosition: 'center top',
                 }}
               />
               <div style={{
                 position: 'absolute', inset: 0,
-                background: 'radial-gradient(ellipse at center 38%, rgba(7,17,31,0.08) 0%, rgba(7,17,31,0.28) 46%, rgba(7,17,31,0.78) 100%)',
+                background: 'linear-gradient(to bottom, rgba(7,17,31,0.12) 0%, rgba(7,17,31,0.02) 34%, rgba(7,17,31,0.45) 62%, rgba(7,17,31,0.88) 100%)',
               }} />
             </motion.div>
 
-            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 1.5rem' }}>
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', padding: '0 1.5rem 12vh' }}>
               <p className="caps" style={{ color: '#e4c98a', fontSize: '0.68rem', marginBottom: '0.85rem' }}>
                 An Exclusive Invitation
               </p>
