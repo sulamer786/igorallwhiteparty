@@ -160,7 +160,7 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
             onClick={onClose}
             style={{
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              backgroundColor: 'rgba(28, 28, 28, 0.28)',
+              backgroundColor: 'rgba(4, 8, 16, 0.55)',
               backdropFilter: 'blur(8px)',
               zIndex: 99,
             }}
@@ -174,7 +174,7 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
             style={{
               position: 'fixed',
               bottom: 0, left: 0, right: 0,
-              background: 'rgba(247, 244, 239, 0.97)',
+              background: 'rgba(7, 17, 31, 0.96)',
               backdropFilter: 'blur(30px)',
               WebkitBackdropFilter: 'blur(30px)',
               borderTop: '1px solid var(--border-color)',
@@ -188,7 +188,7 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
               overflowY: 'auto',
             }}
           >
-            <div style={{ width: '36px', height: '4px', background: 'rgba(28,28,28,0.18)', borderRadius: '2px', margin: '0 auto 0.6rem' }} />
+            <div style={{ width: '36px', height: '4px', background: 'rgba(228,201,138,0.4)', borderRadius: '2px', margin: '0 auto 0.6rem' }} />
 
             <button onClick={onClose} aria-label="Close" style={{ position: 'absolute', top: '1.2rem', right: '1.2rem', color: 'var(--text-secondary)', padding: '0.5rem' }}>
               <X size={22} />
@@ -266,8 +266,8 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                       exit={{ opacity: 0, height: 0 }}
                       style={{
                         padding: '0.8rem',
-                        background: '#f8e8e6',
-                        color: '#8a2b2b',
+                        background: 'rgba(154, 48, 48, 0.22)',
+                        color: '#f3c7c7',
                         borderRadius: '8px',
                         fontSize: '0.85rem',
                         textAlign: 'center',
@@ -418,23 +418,14 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                   initial="hidden"
                   animate="visible"
                   variants={fieldAnimation}
+                  className="plaque-button"
                   style={{
-                    background: 'linear-gradient(135deg, var(--brand-green) 0%, var(--brand-emerald) 100%)',
-                    color: '#f7f4ef',
-                    padding: '0.9rem',
-                    borderRadius: '40px',
-                    fontWeight: 600,
-                    letterSpacing: '3px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: '0.5rem',
                     opacity: loading ? 0.7 : 1,
-                    boxShadow: '0 4px 20px rgba(28, 28, 28, 0.16)',
-                    border: '1px solid rgba(28,28,28,0.08)',
-                    fontSize: '0.9rem',
-                    fontFamily: 'Cinzel Decorative, serif',
-                    width: '100%',
+                    maxWidth: 'none',
                   }}
                 >
                   {loading ? <Loader2 className="animate-spin" size={18} /> : 'CONFIRM RSVP'}
@@ -560,7 +551,7 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.3, duration: 0.6 }}
                   style={{
-                    fontSize: '1.8rem', fontFamily: 'Cinzel Decorative, serif',
+                    fontSize: '1.8rem', fontFamily: 'Bodoni Moda, serif',
                     color: 'var(--brand-gold)',
                     textShadow: '0 0 20px rgba(194,168,120,0.4)',
                     marginBottom: '1.5rem', letterSpacing: '6px',
@@ -590,13 +581,8 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                     onClose();
                     router.push(formData.password ? '/dashboard' : '/login');
                   }}
-                  style={{
-                    background: '#1c1c1c',
-                    color: '#f7f4ef', padding: '0.9rem 2rem', borderRadius: '40px',
-                    fontSize: '0.9rem', fontWeight: 700, letterSpacing: '2px',
-                    fontFamily: 'Cinzel Decorative, serif',
-                    boxShadow: '0 4px 20px rgba(194, 168, 120, 0.3)',
-                  }}
+                  className="plaque-button"
+                  style={{ maxWidth: '280px' }}
                 >
                   {formData.password ? 'ENTER VIP DASHBOARD' : 'LOG IN TO DASHBOARD'}
                 </motion.button>

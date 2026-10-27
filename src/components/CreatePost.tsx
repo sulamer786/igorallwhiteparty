@@ -119,10 +119,10 @@ export default function CreatePost({ userId }: { userId: string }) {
               position: 'absolute',
               top: '-10px',
               right: '-10px',
-              background: '#1c1c1c',
+              background: '#e4c98a',
               borderRadius: '50%',
               padding: '4px',
-              color: '#f7f4ef',
+              color: '#07111f',
             }}
           >
             <X size={14} />
@@ -134,7 +134,7 @@ export default function CreatePost({ userId }: { userId: string }) {
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem',
-        background: '#fffdfb',
+        background: 'rgba(7, 17, 31, 0.72)',
         padding: '0.5rem',
         borderRadius: '24px',
         border: '1px solid var(--border-color)',
@@ -172,7 +172,7 @@ export default function CreatePost({ userId }: { userId: string }) {
             flex: 1,
             background: 'transparent',
             border: 'none',
-            color: '#1c1c1c',
+            color: '#f6f1e6',
             outline: 'none',
             fontSize: '1rem',
             padding: '0.5rem',
@@ -186,8 +186,8 @@ export default function CreatePost({ userId }: { userId: string }) {
           disabled={(!content.trim() && !file) || isPosting}
           aria-label="Send message"
           style={{
-            background: (!content.trim() && !file) ? 'rgba(28,28,28,0.12)' : '#1c1c1c',
-            color: '#f7f4ef',
+            background: (!content.trim() && !file) ? 'rgba(228,201,138,0.18)' : '#e4c98a',
+            color: (!content.trim() && !file) ? 'rgba(246,241,230,0.4)' : '#07111f',
             padding: '0.6rem',
             borderRadius: '50%',
             display: 'flex',

@@ -2,10 +2,23 @@
 
 import { useEffect, useState } from "react";
 
-// Fixed silk room. The still is always there. The clip plays on the invite
-// and login unless the visitor asked for less motion.
-export default function SilkBackground({ animate = true, behind = false }: { animate?: boolean; behind?: boolean }) {
+type Scrim = "poster" | "reading";
+
+// Fixed night photograph. The still is always there. The clip plays unless
+// the visitor asked for less motion, or this surface wants a quiet still.
+export default function SilkBackground({
+  animate = true,
+  behind = false,
+  framed = false,
+  scrim = "poster",
+}: {
+  animate?: boolean;
+  behind?: boolean;
+  framed?: boolean;
+  scrim?: Scrim;
+}) {
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -15,46 +28,31 @@ export default function SilkBackground({ animate = true, behind = false }: { ani
     return () => media.removeEventListener("change", apply);
   }, []);
 
-  const playVideo = animate && !reduceMotion;
+  const playVideo = animate && !reduceMotion && !videoFailed;
 
   return (
     <div
       aria-hidden
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: behind ? -1 : 0,
-        pointerEvents: "none",
-        overflow: "hidden",
-        background: "var(--bg-gradient)",
-      }}
+      className={`night-stage${framed ? " night-stage-framed" : ""}`}
+      style={{ zIndex: behind ? -1 : 0 }}
     >
-      {/* Poster, so the first paint is never blank */}
-      <img
-        src="/images/white-silk-bg.png"
-        alt=""
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-      />
-      {playVideo && (
-        <video
-          src="/white-silk.mp4"
-          poster="/images/white-silk-bg.png"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        />
-      )}
-      {/* Stronger in the center so the title reads, lighter at the edges so the silk shows */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at center, rgba(247,244,239,0.84) 0%, rgba(247,244,239,0.7) 58%, rgba(247,244,239,0.58) 100%)",
-        }}
-      />
+      {framed && <div className="night-wash" />}
+      <div className={framed ? "night-poster" : "night-full"}>
+        <img src="/images/white-night-bg.png" alt="" className="night-media" />
+        {playVideo && (
+          <video
+            src="/white-night.mp4"
+            poster="/images/white-night-bg.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="night-media"
+            onError={() => setVideoFailed(true)}
+          />
+        )}
+        <div className={scrim === "reading" ? "night-scrim-reading" : "night-scrim-poster"} />
+      </div>
     </div>
   );
 }

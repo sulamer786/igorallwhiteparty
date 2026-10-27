@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { EVENT_CONFIG } from '@/lib/eventConfig';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 const supabaseAdmin = createClient(
@@ -49,53 +50,30 @@ async function findAuthUserId(email: string) {
 async function sendConfirmation(email: string, fullName: string) {
   if (!process.env.RESEND_API_KEY) return;
   const firstName = fullName.split(' ')[0];
+  const event = EVENT_CONFIG.white;
+  const amenityLine = event.amenities.map((item) => item.label).join(' · ');
   await resend.emails.send({
-    from: "Igor's All White Party <rsvp@jeniebirthday.com>",
+    from: `${event.emailSubjectName} <rsvp@jeniebirthday.com>`,
     to: email,
-    subject: "You're on the list: Igor's All White Party",
+    subject: `You're on the list: ${event.emailSubjectName}`,
     html: `
-      <div style="background-color: #f7f4ef; color: #1c1c1c; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 0; margin: 0;">
-        <div style="background: #f7f4ef; padding: 60px 20px 40px; text-align: center;">
-          <p style="color: #6e5840; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 20px;">Exclusive Invitation</p>
-          <h1 style="color: #1c1c1c; text-transform: uppercase; font-size: 32px; letter-spacing: 4px; margin: 0 0 10px; font-weight: 700;">You're on the list</h1>
-          <h2 style="color: #6e5840; font-size: 18px; font-weight: 400; margin: 0; font-style: italic;">${firstName}</h2>
+      <div style="background-color: #07111f; color: #f6f1e6; font-family: Georgia, 'Times New Roman', serif; padding: 0; margin: 0;">
+        <div style="padding: 56px 24px 28px; text-align: center;">
+          <p style="color: #e4c98a; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 18px;">${event.eyebrow}</p>
+          <div style="width: 72px; height: 1px; background: #e4c98a; margin: 0 auto 16px;"></div>
+          <h1 style="color: #f7f3ea; text-transform: uppercase; font-size: 40px; letter-spacing: 3px; margin: 0; font-weight: 500;">White Party</h1>
+          <p style="color: #f7f3ea; font-size: 18px; font-style: italic; margin: 12px 0 0;">${event.italicLine}</p>
+          <p style="color: #e4c98a; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin: 16px 0 0;">${event.city}</p>
+          <p style="color: #f6f1e6; font-size: 16px; margin: 22px 0 0;">${firstName}, you're on the list.</p>
         </div>
 
-        <div style="max-width: 520px; margin: 0 auto; padding: 0 20px 50px;">
-          <div style="background-color: #fffdfb; padding: 30px; border: 1px solid rgba(110, 88, 64, 0.22); border-radius: 16px;">
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">When</p>
-                  <p style="font-size: 16px; margin: 0; color: #1c1c1c;">November 7th &bull; 8:00 PM – 2:00 AM</p>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Where</p>
-                  <p style="font-size: 16px; margin: 0; color: #1c1c1c;">544 North Victoria Park Road<br/>Fort Lauderdale, FL 33301</p>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 15px 0; border-bottom: 1px solid rgba(110,88,64,0.15);">
-                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Experience</p>
-                  <p style="font-size: 15px; margin: 0; color: #6d645b;">Premium Top Shelf Open Bar &bull; Internationally Known DJs &bull; Performances &bull; Complimentary Valet Parking</p>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 15px 0;">
-                  <p style="color: #6e5840; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 6px;">Dress code</p>
-                  <p style="color: #1c1c1c; font-size: 16px; font-weight: bold; margin: 0; letter-spacing: 1px;">All white, head to toe</p>
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          <div style="text-align: center; margin-top: 40px;">
-            <p style="color: #6d645b; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
-              See you in white.
-            </p>
-          </div>
+        <div style="max-width: 480px; margin: 0 auto; padding: 8px 24px 56px; text-align: center;">
+          <p style="font-size: 20px; letter-spacing: 1px; margin: 0 0 8px; color: #f7f3ea;">${event.dateLabel} &bull; ${event.hours}</p>
+          <p style="font-size: 15px; margin: 0 0 18px; color: rgba(246,241,230,0.8);">${event.addressLines}</p>
+          <p style="font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 18px; color: #f6f1e6;">${event.attire}</p>
+          <p style="font-size: 13px; line-height: 1.6; margin: 0 0 22px; color: #e4c98a;">${amenityLine}</p>
+          <div style="width: 72px; height: 1px; background: #e4c98a; margin: 0 auto 14px;"></div>
+          <p style="color: #e4c98a; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin: 0;">${event.closing}</p>
         </div>
       </div>
     `,

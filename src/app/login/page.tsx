@@ -67,7 +67,7 @@ function LoginContent() {
       padding: '1.5rem',
       position: 'relative',
     }}>
-      <SilkBackground />
+      <SilkBackground framed scrim="reading" />
 
       {/* Back button */}
       <motion.a
@@ -115,8 +115,8 @@ function LoginContent() {
                 exit={{ opacity: 0, height: 0 }}
                 style={{
                   padding: '1rem',
-                  background: '#f8e8e6',
-                  color: '#8a2b2b',
+                  background: 'rgba(154, 48, 48, 0.22)',
+                  color: '#f3c7c7',
                   borderRadius: '8px',
                   marginBottom: '1.5rem',
                   fontSize: '0.9rem',
@@ -133,8 +133,8 @@ function LoginContent() {
                 exit={{ opacity: 0, height: 0 }}
                 style={{
                   padding: '1rem',
-                  background: '#eef3ea',
-                  color: '#2f4a32',
+                  background: 'rgba(228, 201, 138, 0.12)',
+                  color: '#f6f1e6',
                   borderRadius: '8px',
                   marginBottom: '1.5rem',
                   fontSize: '0.9rem',
@@ -183,23 +183,11 @@ function LoginContent() {
               type="submit"
               disabled={loading || !!successMsg}
               whileTap={{ scale: 0.97 }}
+              className="plaque-button"
               style={{
-                width: '100%',
-                background: 'linear-gradient(135deg, var(--brand-green) 0%, var(--brand-emerald) 100%)',
-                color: '#f7f4ef',
-                padding: '1rem',
-                borderRadius: '8px',
-                fontWeight: 600,
-                letterSpacing: '2px',
                 marginTop: '0.5rem',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'all 0.2s',
                 opacity: (loading || !!successMsg) ? 0.7 : 1,
-                boxShadow: '0 4px 15px rgba(28, 28, 28, 0.16)',
-                border: '1px solid rgba(28,28,28,0.08)',
-                fontSize: '1rem',
-                fontFamily: 'Cinzel Decorative, serif',
+                maxWidth: 'none',
               }}
             >
               {loading ? <Loader2 className="animate-spin" size={20} /> : (mode === 'password' ? 'ACCESS DASHBOARD' : 'SEND MAGIC LINK')}
@@ -213,8 +201,7 @@ function LoginContent() {
               marginTop: '2rem',
               fontSize: '0.9rem',
               color: 'var(--text-secondary)',
-              textDecoration: 'underline',
-              textUnderlineOffset: '3px',
+              letterSpacing: '0.04em',
             }}
           >
             {mode === 'password' ? "Don't know your password? Send a Magic Link." : "I have a password instead."}
@@ -227,7 +214,7 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <React.Suspense fallback={<div style={{ height: "100vh", backgroundColor: "#f7f4ef" }} />}>
+    <React.Suspense fallback={<div style={{ height: "100vh", backgroundColor: "#07111f" }} />}>
       <LoginContent />
     </React.Suspense>
   );

@@ -1,15 +1,29 @@
-// Single-event config for Igor's All White Party.
+// Single-event config for Igor's White Party.
 // Host "white" keeps this guest list separate from Casino Royale rows in the shared database.
 
 export type HostKey = 'white';
+export type AmenityIcon = 'car' | 'coupe' | 'rope' | 'headphones' | 'bottle' | 'burst';
+
+export type Amenity = {
+  id: string;
+  label: string;
+  icon: AmenityIcon;
+};
 
 export const EVENT_HOST: HostKey = 'white';
 
 export const EVENT_CONFIG: Record<HostKey, {
+  eyebrow: string;
   heroTitle: string;
-  heroSubtitle: string;
-  heroLine3: string;
-  tagline: string;
+  italicLine: string;
+  city: string;
+  dateLabel: string;
+  hours: string;
+  attire: string;
+  address: string;
+  addressLines: string;
+  closing: string;
+  amenities: readonly Amenity[];
   ogTitle: string;
   ogDescription: string;
   giftMessage: string;
@@ -17,14 +31,28 @@ export const EVENT_CONFIG: Record<HostKey, {
   emailSubjectName: string;
 }> = {
   white: {
-    heroTitle: "Igor's",
-    heroSubtitle: 'All White',
-    heroLine3: 'Party',
-    tagline: 'Dress the part. Wear white.',
-    ogTitle: "Igor's All White Party — November 7th",
-    ogDescription: "You're invited to Igor's All White Party. November 7th, 8:00 PM to 2:00 AM. Wear white.",
+    eyebrow: 'An Exclusive Invitation',
+    heroTitle: 'White Party',
+    italicLine: 'An Evening Under the Stars',
+    city: 'Fort Lauderdale',
+    dateLabel: 'November 7',
+    hours: '10 PM – 3 AM',
+    attire: 'All white, head to toe',
+    address: '544 N Victoria Park Rd, Fort Lauderdale',
+    addressLines: '544 North Victoria Park Road<br/>Fort Lauderdale, FL 33301',
+    closing: 'By Invitation Only',
+    amenities: [
+      { id: 'valet', label: 'Valet Parking', icon: 'car' },
+      { id: 'drinks', label: 'Unlimited Drinks', icon: 'coupe' },
+      { id: 'carpet', label: 'Red Carpet Entrance', icon: 'rope' },
+      { id: 'dj', label: 'Surprise DJ', icon: 'headphones' },
+      { id: 'bar', label: 'Premium Open Bar', icon: 'bottle' },
+      { id: 'fireworks', label: 'Fireworks', icon: 'burst' },
+    ],
+    ogTitle: "Igor's White Party — November 7th",
+    ogDescription: "An exclusive invitation to Igor's White Party. An evening under the stars. November 7th, 10 PM to 3 AM. Fort Lauderdale. Wear white.",
     giftMessage: "This is only to break even on costs of the event. Non-profit! Optional.",
     zelleNumber: '917-574-3935',
-    emailSubjectName: "Igor's All White Party",
+    emailSubjectName: "Igor's White Party",
   },
 } as const;

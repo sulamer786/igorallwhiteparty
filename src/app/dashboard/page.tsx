@@ -12,6 +12,7 @@ import { updateProfile, toggleRsvpStatus } from '@/app/actions/profile';
 import imageCompression from 'browser-image-compression';
 import { type HostKey, EVENT_CONFIG, EVENT_HOST } from '@/lib/eventConfig';
 import SilkBackground from '@/components/SilkBackground';
+import { AmenityGrid } from '@/components/PosterMarks';
 
 type Post = {
   id: string;
@@ -54,7 +55,7 @@ function OverviewTab({ host }: { host: HostKey }) {
             November 7
           </p>
           <p style={{ fontSize: '0.65rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginTop: '2px', textTransform: 'uppercase' }}>
-            8:00 PM – 2:00 AM
+            {config.hours}
           </p>
         </div>
         <p style={{ fontSize: '0.7rem', letterSpacing: '2px', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
@@ -66,43 +67,23 @@ function OverviewTab({ host }: { host: HostKey }) {
         <div style={{ position: 'absolute', top: '12px', right: '16px', fontSize: '0.6rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>
           11.07
         </div>
-        <h2 className="gold-text" style={{ fontSize: '1.5rem', marginBottom: '0.3rem', letterSpacing: '2px', fontFamily: 'Cinzel Decorative, serif' }}>
+        <h2 className="gold-text" style={{ fontSize: '1.35rem', marginBottom: '0.3rem', letterSpacing: '2px' }}>
           THE EVENING
         </h2>
-        <p style={{ fontSize: '0.75rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginBottom: '1.5rem', textTransform: 'uppercase' }}>
-          Igor&apos;s All White Party — November 7th, 2026
+        <p style={{ fontSize: '0.75rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginBottom: '0.4rem', textTransform: 'uppercase' }}>
+          {config.dateLabel} &bull; {config.hours}
         </p>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {[
-            { time: '7:30 PM', label: 'Valet at the front gates' },
-            { time: '8:00 PM', label: 'Doors open • White carpet & premium top shelf open bar' },
-            { time: '10:00 PM', label: 'DJs and performances' },
-            { time: '12:00 AM', label: 'Midnight toast' },
-            { time: '2:00 AM', label: 'Last call' },
-          ].map((item, i, arr) => (
-            <li
-              key={item.time}
-              style={{
-                marginBottom: i < arr.length - 1 ? '1.2rem' : 0,
-                borderBottom: i < arr.length - 1 ? '1px solid var(--border-color)' : 'none',
-                paddingBottom: i < arr.length - 1 ? '1.2rem' : 0,
-                display: 'flex', alignItems: 'baseline', gap: '1rem',
-              }}
-            >
-              <span style={{ color: 'var(--brand-gold)', fontWeight: 600, minWidth: '78px', flexShrink: 0 }}>
-                {item.time}
-              </span>
-              <span>{item.label}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="italic-line" style={{ fontSize: '1.15rem', marginBottom: '0.6rem' }}>
+          {config.italicLine}
+        </p>
+        <AmenityGrid items={config.amenities} />
       </section>
 
       <section className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
         <div style={{ position: 'absolute', top: '12px', right: '16px', fontSize: '0.6rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>
           ALL WHITE
         </div>
-        <h2 className="gold-text" style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '2px', fontFamily: 'Cinzel Decorative, serif' }}>
+        <h2 className="gold-text" style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '2px', fontFamily: 'Cinzel, serif' }}>
           HOUSE NOTES
         </h2>
         <p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
@@ -122,7 +103,7 @@ function OverviewTab({ host }: { host: HostKey }) {
           GIFTS
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
-          <h2 className="gold-text" style={{ fontSize: '1.5rem', margin: 0, letterSpacing: '2px', fontFamily: 'Cinzel Decorative, serif' }}>
+          <h2 className="gold-text" style={{ fontSize: '1.5rem', margin: 0, letterSpacing: '2px', fontFamily: 'Cinzel, serif' }}>
             GIFTS
           </h2>
         </div>
@@ -151,7 +132,7 @@ function OverviewTab({ host }: { host: HostKey }) {
         <div style={{ position: 'absolute', top: '12px', right: '16px', fontSize: '0.6rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>
           FORT LAUDERDALE
         </div>
-        <h2 className="gold-text" style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '2px', fontFamily: 'Cinzel Decorative, serif' }}>
+        <h2 className="gold-text" style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '2px', fontFamily: 'Cinzel, serif' }}>
           THE ADDRESS
         </h2>
         <p style={{ fontWeight: 600, fontSize: '1.2rem', color: 'var(--brand-gold)' }}>The Victoria Park Mansion</p>
@@ -159,7 +140,7 @@ function OverviewTab({ host }: { host: HostKey }) {
           544 North Victoria Park Road<br />Fort Lauderdale, FL 33301
         </p>
         <div style={{ padding: '1rem', background: 'rgba(110,88,64,0.06)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--brand-gold)' }}>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}><strong>Valet:</strong> At the front gates from 7:30 PM. Rideshare is encouraged.</p>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}><strong>Valet:</strong> At the front gates. Rideshare is encouraged.</p>
         </div>
       </section>
     </motion.div>
@@ -181,7 +162,7 @@ function GuestsTab({ userRole, isAdminMode, setIsAdminMode, host }: { userRole: 
       style={{ padding: '1rem', paddingBottom: '140px' }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <h2 className="gold-text" style={{ fontSize: '1.5rem', margin: 0, letterSpacing: '3px', textAlign: 'center', fontFamily: 'Cinzel Decorative, serif' }}>
+        <h2 className="gold-text" style={{ fontSize: '1.5rem', margin: 0, letterSpacing: '3px', textAlign: 'center', fontFamily: 'Cinzel, serif' }}>
           {isAdminMode ? 'GUEST MANAGEMENT' : 'THE GUEST LIST'}
         </h2>
         
@@ -192,8 +173,8 @@ function GuestsTab({ userRole, isAdminMode, setIsAdminMode, host }: { userRole: 
               padding: '0.4rem 1rem',
               borderRadius: '20px',
               fontSize: '0.75rem',
-              background: isAdminMode ? '#1c1c1c' : 'transparent',
-              color: isAdminMode ? '#f7f4ef' : 'var(--brand-gold)',
+              background: isAdminMode ? '#e4c98a' : 'transparent',
+              color: isAdminMode ? '#07111f' : 'var(--brand-gold)',
               border: '1px solid var(--brand-gold)',
               fontWeight: 600,
               cursor: 'pointer',
@@ -272,8 +253,8 @@ function ThreadTab({ posts, guestId }: { posts: Post[]; guestId: string }) {
             <div className="date-separator">{group.date}</div>
             {group.posts.map((post) => {
               const isMe = post.guest_id === guestId;
-              const bg = isMe ? '#1c1c1c' : '#fffdfb';
-              const fg = isMe ? '#f7f4ef' : 'var(--text-primary)';
+              const bg = isMe ? 'rgba(228, 201, 138, 0.16)' : 'rgba(7, 17, 31, 0.62)';
+              const fg = 'var(--text-primary)';
               const align = isMe ? 'flex-end' : 'flex-start';
               const name = post.guests?.full_name?.split(' ')[0] || 'Guest';
 
@@ -468,7 +449,7 @@ export default function DashboardPage() {
   if (loading) return (
     <div style={{ flex: 1, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: 'var(--bg-gradient)' }}>
       <div className="animate-spin" style={{ width: '40px', height: '40px', border: '2px solid rgba(110,88,64,0.2)', borderTopColor: 'var(--brand-gold)', borderRadius: '50%', marginBottom: '1.5rem' }} />
-      <p className="gold-text" style={{ fontSize: '1.2rem', letterSpacing: '4px', fontFamily: 'Cinzel Decorative' }}>Verifying VIP Pass...</p>
+      <p className="gold-text" style={{ fontSize: '1.2rem', letterSpacing: '4px', fontFamily: 'Cinzel, serif' }}>Verifying VIP Pass...</p>
     </div>
   );
 
@@ -487,14 +468,7 @@ export default function DashboardPage() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
 
       {/* Still only. A loop behind the guest thread is a distraction. */}
-      <SilkBackground animate={false} behind />
-
-      {/* Floating CSS Particles */}
-      <div className="particle-field">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="particle" />
-        ))}
-      </div>
+      <SilkBackground animate={false} behind scrim="reading" />
 
       {/* Sticky Header */}
       <header style={{
@@ -503,7 +477,7 @@ export default function DashboardPage() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        background: hasScrolled ? 'rgba(247, 244, 239, 0.92)' : 'transparent',
+        background: hasScrolled ? 'rgba(7, 17, 31, 0.9)' : 'transparent',
         backdropFilter: hasScrolled ? 'blur(15px)' : 'none',
         WebkitBackdropFilter: hasScrolled ? 'blur(15px)' : 'none',
         borderBottom: hasScrolled ? '1px solid var(--border-color)' : '1px solid transparent',
@@ -523,7 +497,7 @@ export default function DashboardPage() {
             <p style={{ fontSize: '0.7rem', letterSpacing: '2px', color: 'var(--text-secondary)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>
               Welcome, {guestName}
             </p>
-            <h1 className="gold-text" style={{ fontSize: '1.1rem', letterSpacing: '3px', margin: 0, fontFamily: 'Cinzel Decorative, serif' }}>
+            <h1 className="gold-text" style={{ fontSize: '1.1rem', letterSpacing: '3px', margin: 0, fontFamily: 'Cinzel, serif' }}>
               {getTabTitle()}
             </h1>
           </div>
@@ -584,7 +558,7 @@ export default function DashboardPage() {
         position: 'fixed',
         bottom: 0, left: 0, right: 0,
         height: 'calc(64px + env(safe-area-inset-bottom))',
-        background: 'rgba(247, 244, 239, 0.96)',
+        background: 'rgba(7, 17, 31, 0.94)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderTop: '1px solid var(--border-color)',
@@ -618,7 +592,7 @@ function TabButton({ icon, label, active, onClick }: { icon: React.ReactNode; la
         flexDirection: 'column',
         alignItems: 'center',
         gap: '0.4rem',
-        color: active ? 'var(--brand-gold)' : 'rgba(28,28,28,0.4)',
+        color: active ? 'var(--brand-gold)' : 'rgba(246,241,230,0.42)',
         transition: 'all 0.2s ease',
         width: '70px',
         padding: '0.3rem 0',
@@ -741,7 +715,7 @@ function ProfileTab({ currentUser, setGuestName, setCurrentUser, supabase }: any
           <input name="plusOneNames" defaultValue={currentUser?.plus_one_names} className="luxury-input" style={{ padding: '0.8rem' }} placeholder="Optional" />
         </div>
         
-        <button type="submit" disabled={loading} style={{ background: '#1c1c1c', color: '#f7f4ef', padding: '0.8rem', borderRadius: '40px', fontWeight: 'bold', marginTop: '0.5rem', opacity: loading ? 0.7 : 1 }}>
+        <button type="submit" disabled={loading} className="plaque-button" style={{ opacity: loading ? 0.7 : 1, maxWidth: 'none' }}>
           {loading ? 'SAVING...' : 'SAVE DETAILS'}
         </button>
       </form>
@@ -754,7 +728,7 @@ function ProfileTab({ currentUser, setGuestName, setCurrentUser, supabase }: any
         <button 
           onClick={handleToggleStatus} 
           disabled={loading}
-          style={{ width: '100%', padding: '0.8rem', borderRadius: '40px', background: isDeclined ? '#1c1c1c' : 'rgba(154, 48, 48, 0.08)', color: isDeclined ? '#f7f4ef' : 'var(--error-color)', border: isDeclined ? 'none' : '1px solid var(--error-color)', fontWeight: 'bold', opacity: loading ? 0.7 : 1 }}
+          style={{ width: '100%', padding: '0.8rem', borderRadius: '40px', background: isDeclined ? '#e4c98a' : 'rgba(224, 138, 138, 0.1)', color: isDeclined ? '#07111f' : 'var(--error-color)', border: isDeclined ? 'none' : '1px solid var(--error-color)', fontWeight: 'bold', opacity: loading ? 0.7 : 1 }}
         >
           {isDeclined ? 'RE-CONFIRM RSVP' : 'CANCEL RSVP'}
         </button>
