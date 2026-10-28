@@ -113,6 +113,16 @@ function OverviewTab({ host }: { host: HostKey }) {
           <p style={{ fontSize: '1.6rem', color: 'var(--text-primary)', letterSpacing: '2px', marginBottom: '0.8rem', fontWeight: 600 }}>
             {config.zelleNumber}
           </p>
+          <img
+            src="/images/zelle-qr.png"
+            alt="Zelle QR code for Igor"
+            width={180}
+            height={180}
+            style={{ width: 180, height: 180, margin: '0.2rem auto 0.6rem', display: 'block', background: '#fff', padding: 8, borderRadius: 8 }}
+          />
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '0.8rem' }}>
+            Scan in your banking app to pay.
+          </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.4 }}>
               No gifts, flowers, or alcohol please — cash only via Zelle.

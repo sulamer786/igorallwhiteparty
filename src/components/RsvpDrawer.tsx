@@ -398,6 +398,16 @@ export default function RsvpDrawer({ isOpen, onClose, trackingRef, host }: RsvpD
                           <p style={{ fontSize: '1.25rem', color: 'var(--text-primary)', letterSpacing: '2px', fontWeight: 600 }}>
                             {config.zelleNumber}
                           </p>
+                          <img
+                            src="/images/zelle-qr.png"
+                            alt="Zelle QR code for Igor"
+                            width={180}
+                            height={180}
+                            style={{ width: 180, height: 180, margin: '0.9rem auto 0.4rem', display: 'block', background: '#fff', padding: 8, borderRadius: 8 }}
+                          />
+                          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                            Scan in your banking app to pay.
+                          </p>
                           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.8rem', fontStyle: 'italic', lineHeight: 1.5 }}>
                             No gifts, flowers, or alcohol please — cash only via Zelle.
                           </p>
